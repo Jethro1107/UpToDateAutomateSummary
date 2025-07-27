@@ -1,0 +1,143 @@
+templates:
+  condition:
+    - name: definition
+      level: 1
+      required: true
+      description: "Brief description of the medical condition"
+    - name: epidemiology
+      level: 1
+      required: true
+      description: "Prevalence and demographic data"
+    - name: pathophysiology
+      level: 1
+      required: true
+      description: "Underlying disease mechanisms"
+    - name: clinical_presentation
+      level: 1
+      required: true
+      description: "Symptoms and clinical features"
+    - name: signs
+      level: 1
+      required: true
+      description: "Physical examination findings"
+    - name: investigations
+      level: 1
+      required: true
+      description: "Diagnostic tests and key findings"
+      sub_sections:
+        - name: laboratory_tests
+          level: 2
+          description: "Blood, urine, or other lab tests"
+        - name: imaging
+          level: 2
+          description: "Radiology or ultrasound findings"
+    - name: diagnosis
+      level: 1
+      required: true
+      description: "Diagnostic criteria"
+    - name: differential_diagnosis
+      level: 1
+      required: true
+      description: "Possible alternative diagnoses"
+    - name: management
+      level: 1
+      required: true
+      description: "Treatment and management strategies"
+  presenting_complaint:
+    - name: definition
+      level: 1
+      required: true
+      description: "Brief description of the presenting complaint"
+    - name: pathophysiology
+      level: 1
+      required: true
+      description: "Underlying mechanisms of the complaint"
+    - name: differential_diagnosis
+      level: 1
+      required: true
+      description: "Possible diagnoses for the complaint"
+    - name: clinical_assessment
+      level: 1
+      required: true
+      description: "History and physical exam findings"
+    - name: history
+      level: 1
+      description: "Salient points in history taking for a presenting complaint (organised into subsections of HPI, PMH, Drug Hx, SHx, FHx)"
+    - name: physical_examination
+      level: 1
+      description: "Important physical examinations and salient findings"
+      sub_sections:
+        - name: history
+          level: 2
+          description: "Relevant history (e.g., HPI, PMH)"
+        - name: physical_examination
+          level: 2
+          description: "Physical exam findings"
+    - name: initial_management
+      level: 1
+      required: true
+      description: "Initial treatment steps"
+  drug:
+    - name: class
+      level: 1
+      required: true
+      description: "Drug classification"
+    - name: mechanism_of_action
+      level: 1
+      required: true
+      description: "How the drug works"
+    - name: route_of_administration
+      level: 1
+      required: true
+      description: "Administration method"
+    - name: indications
+      level: 1
+      required: true
+      description: "Approved uses"
+    - name: dosing
+      level: 1
+      required: true
+      description: "Dosage instructions"
+    - name: cautions
+      level: 1
+      required: true
+      description: "Warnings and precautions"
+    - name: side_effects
+      level: 1
+      required: true
+      description: "Potential adverse effects"
+    - name: monitoring
+      level: 1
+      required: true
+      description: "Monitoring requirements"
+depth_options:
+  brief:
+    sentences: 2
+    detail: "concise"
+    description: "Short summaries for quick reference"
+  detailed:
+    sentences: 5
+    detail: "comprehensive"
+    description: "Detailed summaries for in-depth analysis"
+output_formats:
+  primary: json
+  secondary:
+    - org-mode
+    - markdown
+ingestion_settings:
+  chunk_size: 1500  # Characters per JSON chunk
+  max_chunks_per_subtask: 10  # Limit chunks for memory efficiency
+validation_settings:
+  strictness: high  # Options: low, medium, high
+  required_fields:
+    management:
+      - drugs
+      - dosages
+      - lifestyle_changes
+    differential_diagnosis:
+      - life_threatening_conditions
+      - distinguishing_features
+    investigations:
+      - diagnostic_tests
+      - key_findings
+batch_processing: true  
